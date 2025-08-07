@@ -14,7 +14,6 @@ export const AppContextProvider = (props)=>{
 
     //Importing Currency Symbol
     const currency = import.meta.env.VITE_CURRENCY
-
     const navigate = useNavigate()
 
     const {getToken} = useAuth()
