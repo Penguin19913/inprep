@@ -7,7 +7,7 @@ const CourseSection = () => {
   const {allCourses} = useContext(AppContext)
 
   return (
-    <div className='py-16 md:px-20 px-8 md:w-350 ml-5 mr-5'>
+    <div className='py-5 md:px-20 px-4 md:w-350 ml-5 mr-5'>
       <h2 className='text-3x1 font-medium text-gray-800'>Learn from the best</h2>
       <p className='text-sm md:text-base text-gray-500 mt-3 mb-5'>Discover our top-rated courses across various categories. From Class 1 to 12 <br/> Navodya or any government school exam, our courses are crafted to deliver results.</p>
 
