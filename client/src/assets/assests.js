@@ -9,7 +9,7 @@ import time_clock_icon from './time_clock_icon.svg'
 import time_left_clock_icon from './time_left_clock_icon.svg'
 import lesson_icon from './lesson_icon.svg'
 import play_icon from './play_icon.svg'
-import logo from './logo_icon.jpg'
+import logo from './logo_icon.png'
 import blue_tick_icon from './blue_tick_icon.svg'
 import accenture_logo from './accenture_logo.svg'
 import paypal_logo from './paypal_logo.svg'
@@ -31,6 +31,9 @@ import dropdown_icon from './dropdown_icon.svg'
 import cross_icon from './cross_icon.svg'
 import qrcode from './qrcode.png'
 import sketch from './sktech.svg'
+import kids_studying from './kids_studying.png'
+import inprep from './inprep.png'
+import inprep_with_name from './inprep_with_name.png'
 export const assets = {
     logo,
     user_icon,
@@ -63,7 +66,10 @@ export const assets = {
     cross_icon,
     dropdown_icon,
     qrcode,
-    sketch
+    sketch,
+    kids_studying,
+    inprep,
+    inprep_with_name
 }
 
 export const dummyDashboardData = {

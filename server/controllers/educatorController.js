@@ -4,6 +4,7 @@ import { v2 as cloudinary } from 'cloudinary'
 import { json } from 'express'
 import { Purchase } from '../models/Purchase.js'
 import User from '../models/User.js'
+import Batch from '../models/Batch.js'
 
 //update role to educator
 export const updateRoleToEducator = async (req, res)=>{
@@ -44,6 +45,34 @@ export const addCourse = async (req, res)=>{
         await newCourse.save()
 
         res.json({ success: true, message: 'Course Added'})
+
+    } catch (error){
+        res.json({ success: false, message: error.message})
+    }
+}
+
+// Add New Batch
+export const addBatch = async (req, res)=>{
+    try {
+        const { batchData } = req.body
+        const imageFile = req.file
+        const educatorId = req.auth.userId
+
+        if(!batchData){
+            return res.json({ success: false, message: 'Batch Not Attached'})
+        }
+        if(!imageFile){
+            return res.json({ success: false, message: 'Thumbnail Not Attached'})
+        }
+        
+        const parsedBatchData = await JSON.parse(batchData)
+        parsedBatchData.educator = educatorId
+        const newBatch = await Batch.create(parsedBatchData)
+        const imageUpload = await cloudinary.uploader.upload(imageFile.path)
+        newBatch.batchThumbnail = imageUpload.secure_url
+        await newBatch.save()
+
+        res.json({ success: true, message: 'Batch Added'})
 
     } catch (error){
         res.json({ success: false, message: error.message})

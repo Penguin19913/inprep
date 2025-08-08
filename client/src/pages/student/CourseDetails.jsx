@@ -110,7 +110,8 @@ useEffect(() => {
   return courseData && enrolledStudents ? (
     <>
       <div className="flex md:flex-row flex-col-reverse xl:gap-50 gap-10 relative items-start md:justify-center items-center md:gap-30 md:px-36 px-8 md:pt-30 w-screen pt-20 text-left">
-        <div className="absolute top-0 left-0 w-full h-80 z-1 bg-gradient-to-b from-cyan-100/70"></div>
+        <div className="absolute top-0 left-0 w-full h-80 z-10 bg-gradient-to-b from-[#f5eddf]/70 to [#f5eddf]"></div>
+        {/* <div className="absolute top-0 left-0 w-full h-80 z-1 bg-gradient-to-b from-cyan-100/70"></div> */}
         {/* left column */}
         <div className="max-w-xl z-10 text-gray-500">
           <h1 className="md:text-course-details-heading large text-4xl text-course-details-heading-small font-semibold text-gray-800">

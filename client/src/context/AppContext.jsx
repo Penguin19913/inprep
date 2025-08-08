@@ -38,7 +38,21 @@ export const AppContextProvider = (props)=>{
             toast.error(error.message)
         }
     }
+    //Fetch All Batches
+    const fetchAllBatches = async()=>{
+        try {
+            const {data} = await axios.get(backendUrl + '/api/course/all')
 
+            if(data.success){
+                setAllCourses(data.courses)
+            }else{
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+ 
     //Fetch User Data
     const fetchUserData = async()=>{
 

@@ -11,7 +11,7 @@ const Footer = () => {
 
           </div>
           <p className='py-4 text-center text-xs md:text-sm text-gray-500'>
-            Copyright © 2025 Instaprep by BeyondStudy. All Right Reserved.
+            Copyright © 2025 Inprep by BeyondStudy. All Right Reserved.
           </p>
       </div>
       {/* Right Side */}
