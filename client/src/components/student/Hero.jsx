@@ -15,7 +15,7 @@ const Hero = () => {
   {/* Text Overlay */}
   <div className="absolute inset-0 flex flex-col items-center justify-center text-center bottom-0 text-black bg-black/20">
     <h2 className="text-2xl md:text-7xl font-bold text-white">Complete NCERT-based learning starting from ₹299!</h2>
-    <p className="mt-2 text-lg text-white">Fun, Affordable, Teacher-led classes from Class 1 to 12.</p>
+    <p className="hidden sm:block mt-2 text-lg text-white">Fun, Affordable, Teacher-led classes from Class 1 to 12.</p>
     <SearchBar />
   </div>
 </div>
