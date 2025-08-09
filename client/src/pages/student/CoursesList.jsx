@@ -2,7 +2,7 @@
 import { AppContext } from '../../context/AppContext';
 import SearchBar from '../../components/student/SearchBar';
 import { useParams } from 'react-router-dom';
-import CourseCard from '../../components/student/CourseCard';
+import BatchCard from '../../components/student/BatchCard.jsx';
 import React, { useContext, useEffect, useState } from 'react';
 import { assets } from '../../assets/assests';
 import Footer from '../../components/student/Footer';
@@ -10,23 +10,26 @@ import Footer from '../../components/student/Footer';
 
 const CoursesList = () => {
 
-  const {navigate, allCourses} = useContext(AppContext);
+  const {navigate, allBatches} = useContext(AppContext);
   const {input} = useParams();
-  const [filteredCourse, setFilteredCourse] = useState([]);
+  const [filteredBatch, setFilteredBatch] = useState([]);
 
-useEffect(() => {
-  if(allCourses && allCourses.length > 0) {
-    const tempCourses = allCourses.slice();
+  useEffect(() => {
+  if(allBatches && allBatches.length > 0) {
+    const tempBatches = allBatches.slice();
 
     input ? 
-      setFilteredCourse(
-        tempCourses.filter(
-          item => item.courseTitle.toLowerCase().includes(input.toLowerCase())
+      setFilteredBatch(
+        tempBatches.filter(
+          item => item.batchTitle.toLowerCase().includes(input.toLowerCase())
         )
       )
-    : setFilteredCourse(tempCourses)
+    : setFilteredBatch(tempBatches)
+  }else{
+        console.log("hello")
+
   }
-},[allCourses, input])
+},[allBatches, input])
 
   return (
     <>
@@ -34,7 +37,7 @@ useEffect(() => {
         <div className='flex md:flex-row flex-col gap-6 items-start justify-between w-full'>
           <div>
             <h1 className='text-4xl font-semibold text-gray-800'>Course List</h1>
-            <p className='text-gray-500'><span className='text-blue-600 cursor-pointer' onClick={()=> navigate('/')}>Home</span> / <span>Course List</span></p>
+            <p className='text-gray-500'><span className='text-blue-600 cursor-pointer' onClick={()=> navigate('/')}>Home</span> / <span>Batches List</span></p>
           </div>
           <SearchBar data={input}/>
         </div>
@@ -42,10 +45,9 @@ useEffect(() => {
           <p>{input}</p>
           <img src={assets.cross_icon} alt="cross_icon" className='cursor-pointer' onClick={()=>navigate('/course-list')} />
         </div>
-
         }
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 my-16 gap-3 px-2 md:p-0'>
-          {filteredCourse.map((course, index)=> <CourseCard key={index} course={course}/>)}
+          {filteredBatch.map((batch, index)=> <BatchCard key={index} batch={batch}/>)}
         </div>
       </div>
       <Footer />

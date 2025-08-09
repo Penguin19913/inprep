@@ -20,6 +20,7 @@ export const AppContextProvider = (props)=>{
     const {user} = useUser()
  
     const [allCourses, setAllCourses] = useState([])
+    const [allBatches, setAllBatches] = useState([])
     const [isEducator, setIsEducator] = useState(false)
     const [enrolledCourses, setEnrolledCourses] = useState([])
     const [userData, setUserData] = useState(null)
@@ -41,10 +42,10 @@ export const AppContextProvider = (props)=>{
     //Fetch All Batches
     const fetchAllBatches = async()=>{
         try {
-            const {data} = await axios.get(backendUrl + '/api/course/all')
+            const {data} = await axios.get(backendUrl + '/api/course/batch/all')
 
             if(data.success){
-                setAllCourses(data.courses)
+                setAllBatches(data.batches)
             }else{
                 toast.error(data.message)
             }
@@ -132,6 +133,7 @@ export const AppContextProvider = (props)=>{
 
     useEffect(()=>{
         fetchAllCourses()
+        fetchAllBatches()
     },[])
 
     useEffect(()=>{
@@ -144,6 +146,7 @@ export const AppContextProvider = (props)=>{
     const value = {
         currency, 
         allCourses,
+        allBatches,
         navigate,
         calculateRating,
         isEducator,
@@ -154,7 +157,7 @@ export const AppContextProvider = (props)=>{
         enrolledCourses,
         setEnrolledCourses,
         fetchUserEnrolledCourses,
-        backendUrl, userData, setUserData, getToken, fetchAllCourses
+        backendUrl, userData, setUserData, getToken, fetchAllCourses, fetchAllBatches
     }
     return(
         <AppContext.Provider value={value}>

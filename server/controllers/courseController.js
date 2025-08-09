@@ -1,5 +1,7 @@
 // import { User } from "@clerk/express";
+import { Batches } from "openai/resources.js";
 import Course from "../models/Course.js";
+import Batch from "../models/Batch.js";
 
 
 //Get All Courses
@@ -37,9 +39,31 @@ export const getCourseId = async (req, res)=>{
     }
 }
 
+//Get All Batches
+export const getAllBatch = async (req, res) => {
+    try {
+        const batches = await Batch.find({
+            isPublished: true
+        }).select(['-batchContent', '-enrolledStudents']).populate({path: 'educator'})
 
+        res.json({success: true, batches})
+    } catch (error) {
+        res.json({success: false, message: error.message })
+    }
+}
 
+// Get Course By Id
+export const getBatchId = async (req, res)=>{
+    const {id} = req.params 
 
+    try {
+        const batchData = await Batch.findById(id).populate({path: 'educator'})
+
+        res.json({success: true, batchData})
+    } catch (error) {
+        res.json({success: false, message: error.message})
+    }
+}
 
 
 // export const addUserRating = async (req, res)=>{

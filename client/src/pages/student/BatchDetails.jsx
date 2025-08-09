@@ -8,26 +8,27 @@ import Footer from "../../components/student/Footer";
 import YouTube from "react-youtube";
 import axios from "axios";
 import { toast } from "react-toastify";
-const CourseDetails = () => {
+import CourseCard from "../../components/student/CourseCard";
+const BatchDetails = () => {
   const { id } = useParams();
   const [enrolledStudents, setEnrolledStudents] = useState([]);
   const [batchData, setBatchData] = useState(null);
   const [isAlreadyEnrolled, setisAlreadyEnrolled] = useState(false);
   const [playerData, setplayerData] = useState(null);
-  
-  const {
-    currency,
-    backendUrl,
-    userData, navigate
-  } = useContext(AppContext);
+  const [filteredCourse, setFilteredCourse] = useState([]);
+  const [displayCourses, setDisplayCourses] = useState([]);
+
+  const { currency, backendUrl, userData, navigate, allCourses } =
+    useContext(AppContext);
 
   const fetchBatchData = async () => {
     try {
-      const { data } = await axios.get(backendUrl + "/api/batch/" + id);
+      const { data } = await axios.get(backendUrl + "/api/course/batch/" + id);
 
       if (data.success) {
         setBatchData(data.batchData);
         setEnrolledStudents(data.batchData.enrolledStudents);
+        setFilteredCourse(data.batchData.batchContent || []);
       } else {
         toast.error(data.message);
       }
@@ -38,15 +39,13 @@ const CourseDetails = () => {
 
   const checkEnrollement = async () => {
     try {
-        const id = userData._id;
-        if (enrolledStudents.includes(id)) {
-          setisAlreadyEnrolled(true);
-        } else {
-          toast.error("Buy this course for brighter future...")
+      const id = userData._id;
+      if (enrolledStudents.includes(id)) {
+        setisAlreadyEnrolled(true);
+      } else {
+        toast.error("Buy this course for brighter future...");
       }
-    } catch (error) {
-
-    }
+    } catch (error) {}
   };
 
   const enrollCourse = async () => {
@@ -80,21 +79,37 @@ const CourseDetails = () => {
     // }
   };
 
-useEffect(() => {
-  fetchBatchData(); // runs only once
-}, []);
+  useEffect(() => {
+    fetchBatchData(); // runs only once
+  }, []);
 
-useEffect(() => {
-  if (userData?._id && enrolledStudents.length > 0) {
-    checkEnrollement(); // only runs when data is ready
-  }
-}, [userData, enrolledStudents]);
+  useEffect(() => {
+    if (userData?._id && enrolledStudents.length > 0) {
+      checkEnrollement(); // only runs when data is ready
+    }
+  }, [userData, enrolledStudents]);
 
-// const getYouTubeVideoId = (url) => {
-//   if (!url) return "";
-//   const match = url.match(/(?:\?v=|\/embed\/|\.be\/)([^&\n?#]+)/);
-//   return match ? match[1] : "";
-// };
+  useEffect(() => {
+    if (
+      allCourses &&
+      allCourses.length > 0 &&
+      filteredCourse &&
+      filteredCourse.length > 0
+    ) {
+      const filtered = allCourses.filter((course) =>
+        filteredCourse.includes(course._id)
+      );
+      setDisplayCourses(filtered);
+    } else {
+      setDisplayCourses([]);
+    }
+  }, [allCourses, filteredCourse]);
+
+  // const getYouTubeVideoId = (url) => {
+  //   if (!url) return "";
+  //   const match = url.match(/(?:\?v=|\/embed\/|\.be\/)([^&\n?#]+)/);
+  //   return match ? match[1] : "";
+  // };
 
   return batchData && enrolledStudents ? (
     <>
@@ -103,10 +118,15 @@ useEffect(() => {
         {/* <div className="absolute top-0 left-0 w-full h-80 z-1 bg-gradient-to-b from-cyan-100/70"></div> */}
         {/* left column */}
         <div className="max-w-xl z-10 text-gray-500">
-          <h1 className="md:text-course-details-heading large text-4xl text-course-details-heading-small font-semibold text-gray-800">
+          <h1 className="hidden md:block md:text-course-details-heading large text-4xl text-course-details-heading-small font-semibold text-gray-800">
             {batchData.batchTitle}
           </h1>
-
+          <p className="hidden md:block text-sm">
+            Course on{" "}
+            <span className="text-blue-600">
+              <Link to="/">Inprep</Link>
+            </span>
+          </p>
           <div className="py-5 text-sm md:text-default">
             <h3 className="text-xl font-semibold text-gray-800">
               Batch Description
@@ -115,6 +135,17 @@ useEffect(() => {
               className="pt-3 rich-text"
               dangerouslySetInnerHTML={{ __html: batchData.batchDescription }}
             ></p>
+          </div>
+          {/* Display Subjects in The Batch */}
+          <div className="relative px-4 md:px-10 lg:px-20 py-10 bg-gradient-to-br from-[#f5eddf] via-[#f7f3e9] to-[#e9e2d1] rounded-2xl shadow-xl border border-[#e5d7b8] min-h-[40vh]">
+            <h4 className=" font-bold text-gray-800 mb-3 tracking-tight">
+              Subjects in this Batch
+            </h4>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {displayCourses.map((course, index) => (
+                <CourseCard key={index} course={course} />
+              ))}
+            </div>
           </div>
 
           {/* Review and ratings */}
@@ -144,14 +175,7 @@ useEffect(() => {
             </p>
           </div> */}
 
-          <p className="text-sm">
-            Course on{" "}
-            <span className="text-blue-600">
-              <Link to="/">Inprep</Link>
-            </span>
-          </p>
-
-          {/* Structure of Course */}    
+          {/* Structure of Course */}
         </div>
 
         {/* right column */}
@@ -176,6 +200,17 @@ useEffect(() => {
           )}
 
           <div className="p-5">
+            <div className="flex items-center gap-2">
+              <h1 className="md:hidden md:text-course-details-heading large text-4xl text-course-details-heading-small font-semibold text-gray-800">
+                {batchData.batchTitle}
+              </h1>
+              <p className="md:hidden text-sm">
+                Course on{" "}
+                <span className="text-blue-600">
+                  <Link to="/">Inprep</Link>
+                </span>
+              </p>
+            </div>
             <div className="flex items-center gap-2">
               <img
                 className="w-3.5"
@@ -207,9 +242,7 @@ useEffect(() => {
               onClick={enrollCourse}
               className="md:mt-6 mt-4 w-full py-3 rounded bg-blue-600 text-white font-medium"
             >
-              {isAlreadyEnrolled ? "Select Subject To Study" : 
-                "Enroll Now"
-              }
+              {isAlreadyEnrolled ? "Select Subject To Study" : "Enroll Now"}
             </button>
             <div className="pt-6">
               <p className="md:text-xl text-lg font-medium text-gray-800">
@@ -233,4 +266,4 @@ useEffect(() => {
   );
 };
 
-export default CourseDetails;
+export default BatchDetails;

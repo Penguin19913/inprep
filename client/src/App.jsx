@@ -15,6 +15,7 @@ import Navbar from './components/student/Navbar'
 import "quill/dist/quill.snow.css"
 import { ToastContainer } from 'react-toastify'
 import AddBatch from './pages/educator/AddBatch'
+import BatchDetails from './pages/student/BatchDetails'
 
 const App = () => {
   
@@ -27,6 +28,7 @@ const App = () => {
         <Route path='/' element={<Home />}/>
         <Route path='/course-list' element={<CoursesList />}/>
         <Route path='/course-list/:input' element={<CoursesList />}/>
+        <Route path="/batch/:id" element={<BatchDetails />} />
         <Route path='/course/:id' element={<CourseDetails />}/>
         <Route path='/my-enrollments' element={<MyEnrollments />}/>
         <Route path='/player/:courseId' element={<Player />}/>

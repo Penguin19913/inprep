@@ -34,6 +34,8 @@ import sketch from './sktech.svg'
 import kids_studying from './kids_studying.png'
 import inprep from './inprep.png'
 import inprep_with_name from './inprep_with_name.png'
+import made_in_india from './made_in_india.png'
+
 export const assets = {
     logo,
     user_icon,
@@ -69,7 +71,8 @@ export const assets = {
     sketch,
     kids_studying,
     inprep,
-    inprep_with_name
+    inprep_with_name,
+    made_in_india
 }
 
 export const dummyDashboardData = {

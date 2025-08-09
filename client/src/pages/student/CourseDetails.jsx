@@ -117,12 +117,12 @@ useEffect(() => {
           <h1 className="md:text-course-details-heading large text-4xl text-course-details-heading-small font-semibold text-gray-800">
             {courseData.courseTitle}
           </h1>
-          <p
+          {/* <p
             className="pt-4 md:text-base text-sm"
             dangerouslySetInnerHTML={{
               __html: courseData.courseDescription.slice(0, 200),
             }}
-          ></p>
+          ></p> */}
 
           {/* Review and ratings */}
           <div className="flex items-center space-x-2 pt-3 pb-1 text-sm">
@@ -154,7 +154,7 @@ useEffect(() => {
           <p className="text-sm">
             Course on{" "}
             <span className="text-blue-600">
-              <Link to="/">Beyond Study</Link>
+              <Link to="/">Inprep</Link>
             </span>
           </p>
 
@@ -269,7 +269,7 @@ useEffect(() => {
           )}
 
           <div className="p-5">
-            <div className="flex items-center gap-2">
+            {/* <div className="flex items-center gap-2">
               <img
                 className="w-3.5"
                 src={assets.time_left_clock_icon}
@@ -278,8 +278,8 @@ useEffect(() => {
               <p className="text-red-500">
                 <span className="font-medium">5 days</span> left at this price!
               </p>
-            </div>
-            <div className="flex gap-3 items-center pt-2">
+            </div> */}
+            {/* <div className="flex gap-3 items-center pt-2">
               <p className="text-gray-800 md:text-4xl text-2xl font-semibold">
                 {currency}{" "}
                 {(
@@ -294,7 +294,7 @@ useEffect(() => {
               <p className="md:text-lg text-gray-500">
                 {courseData.discount}% off
               </p>
-            </div>
+            </div> */}
 
             <div className="flex items-center text-sm md:text-default gap-4 pt-2 md:pt-4 text-gray-500">
               <div className="flex items-center gap-1">
@@ -326,7 +326,7 @@ useEffect(() => {
               className="md:mt-6 mt-4 w-full py-3 rounded bg-blue-600 text-white font-medium"
             >
               {isAlreadyEnrolled ? "Click To Study" : 
-                "Enroll Now"
+                "Enroll In Batch Now"
               }
             </button>
             <div className="pt-6">
