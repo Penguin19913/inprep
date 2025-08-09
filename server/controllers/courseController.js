@@ -1,5 +1,4 @@
 // import { User } from "@clerk/express";
-import { Batches } from "openai/resources.js";
 import Course from "../models/Course.js";
 import Batch from "../models/Batch.js";
 
