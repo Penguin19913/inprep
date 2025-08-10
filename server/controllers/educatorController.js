@@ -157,3 +157,36 @@ export const getEnrolledStudentsData = async (req, res)=>{
         res.json({success: false, message: error.message})
     }
 }
+
+//Get Course By Id
+export const getCourseById = async (req, res) => {
+  try {
+    const course = await Course.findById(req.params.id).populate('educator')
+    if (!course) return res.status(404).json({ success: false, message: 'Course not found' })
+    res.json({ success: true, course })
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message })
+  }
+}
+
+//Update Course By Id
+export const updateCourseById = async (req, res) => {
+  try {
+    const courseData = JSON.parse(req.body.courseData)
+    let updateFields = {
+      courseTitle: courseData.courseTitle,
+      courseDescription: courseData.courseDescription,
+      coursePrice: courseData.coursePrice,
+      discount: courseData.discount,
+      courseContent: courseData.courseContent,
+    }
+    if (req.file) {
+      updateFields.thumbnailUrl = req.file.path // or your cloudinary url logic
+    }
+    const course = await Course.findByIdAndUpdate(req.params.id, updateFields, { new: true })
+    if (!course) return res.status(404).json({ success: false, message: 'Course not found' })
+    res.json({ success: true, course })
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message })
+  }
+}
