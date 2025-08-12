@@ -190,3 +190,24 @@ export const updateCourseById = async (req, res) => {
     res.status(500).json({ success: false, message: error.message })
   }
 }
+
+//Delete Course By Id
+export const deleteCourseById = async (req, res) => {
+  try {
+    const deleted = await Course.findByIdAndDelete(req.params.id)
+    if (!deleted) return res.status(404).json({ success: false, message: 'Course not found' })
+    res.json({ success: true, message: 'Course deleted successfully' })
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message })
+  }
+}
+
+//Fetch All User
+export const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find({}, '_id email');
+    res.json({ success: true, users });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};

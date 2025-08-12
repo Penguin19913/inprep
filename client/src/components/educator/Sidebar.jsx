@@ -13,6 +13,8 @@ const Sidebar = () => {
     { name:'Add Batch', path: '/educator/add-batch', icon: assets.add_icon},
     { name:'My Courses', path: '/educator/my-courses', icon: assets.my_course_icon},
     { name:'Student Enrolled', path: '/educator/student-enrolled', icon: assets.person_tick_icon },
+    { name:'All Users', path: '/educator/all-users', icon: assets.user_icon },
+
   ];
   return isEducator && (
     <div className='md:w-64 w-16 border-r min-h-screen text-base border-gray-500 py-2 flex flex-col'>

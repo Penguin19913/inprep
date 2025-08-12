@@ -17,6 +17,7 @@ import { ToastContainer } from 'react-toastify'
 import AddBatch from './pages/educator/AddBatch'
 import BatchDetails from './pages/student/BatchDetails'
 import EditCourse from './pages/educator/EditCourse'
+import AllUsers from './pages/educator/AllUsers'
 
 const App = () => {
   
@@ -41,6 +42,8 @@ const App = () => {
           <Route path="edit-course/:id" element={<EditCourse />} />
           <Route path='my-courses' element={<MyCourses />}/>
           <Route path='student-enrolled' element={<StudentsEnrolled />}/>
+          <Route path="all-users" element={<AllUsers />} />
+
         </Route>
       </Routes>
     </div>
