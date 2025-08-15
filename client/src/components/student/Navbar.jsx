@@ -40,7 +40,10 @@ const Navbar = () => {
 
   return (
     <div className={`flex items-center justify-between px-4 sm:px-10 md:px-14 lg:px-36 border-b border-gray-500 py-4 ${isCourseListPage ? 'bg-[#f5eddf]':'bg-[#f5eddf]'}` }>
+    <div className="flex items-center gap-2">
       <img onClick={()=> navigate('/')}src={assets.inprep} alt='logo' className='w-15 h-auto lg:w-20 lg:h-auto cursor-pointer rounded-full' />
+      <img src={assets.inprep_name} alt="Inprep Name" className="h-8" />
+    </div>
       <div className='hidden md:flex items-center gap-5 text-gray-500'>
           <div className='flex items-center gap-5'>
             {user &&  <> 

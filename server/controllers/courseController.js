@@ -64,7 +64,23 @@ export const getBatchId = async (req, res)=>{
     }
 }
 
+export const addCourseToBatch = async (req, res) => {
+  try {
+    const { batchId } = req.params;
+    const { courseId } = req.body;
+    const batch = await Batch.findById(batchId);
+    if (!batch) return res.status(404).json({ success: false, message: "Batch not found" });
 
+    if (!batch.batchContent.includes(courseId)) {
+      batch.batchContent.push(courseId);
+      await batch.save();
+    }
+
+    res.json({ success: true, batch });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
 // export const addUserRating = async (req, res)=>{
 //     try {
         

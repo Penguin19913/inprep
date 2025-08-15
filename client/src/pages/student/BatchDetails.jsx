@@ -28,7 +28,6 @@ const BatchDetails = () => {
       if (data.success) {
         setBatchData(data.batchData);
         setEnrolledStudents(data.batchData.enrolledStudents);
-        setFilteredCourse(data.batchData.batchContent || []);
       } else {
         toast.error(data.message);
       }
@@ -90,20 +89,41 @@ const BatchDetails = () => {
   }, [userData, enrolledStudents]);
 
   useEffect(() => {
-    if (
-      allCourses &&
-      allCourses.length > 0 &&
-      filteredCourse &&
-      filteredCourse.length > 0
-    ) {
-      const filtered = allCourses.filter((course) =>
-        filteredCourse.includes(course._id)
-      );
-      setDisplayCourses(filtered);
-    } else {
-      setDisplayCourses([]);
-    }
-  }, [allCourses, filteredCourse]);
+  if (
+    allCourses &&
+    allCourses.length > 0 &&
+    batchData &&
+    batchData.batchTitle
+  ) {
+    const filtered = allCourses.filter(
+      (course) =>
+        Array.isArray(course.enrolledBatches) &&
+        course.enrolledBatches.includes(batchData.batchTitle)
+    );
+    setDisplayCourses(filtered);
+  } else {
+    setDisplayCourses([]);
+  }
+}, [allCourses, batchData]);
+
+  useEffect(() => {
+  if (
+    allCourses &&
+    allCourses.length > 0 &&
+    batchData &&
+    batchData.batchTitle
+  ) {
+    // Find courses where enrolledBatches includes the current batch name
+    const matchedCourseIds = allCourses
+      .filter(course =>
+        course.enrolledBatches &&
+        course.enrolledBatches.includes(batchData.batchTitle)
+      )
+      .map(course => course._id);
+
+    setFilteredCourse(matchedCourseIds);
+  }
+}, [allCourses, batchData]);
 
   // const getYouTubeVideoId = (url) => {
   //   if (!url) return "";

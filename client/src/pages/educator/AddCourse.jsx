@@ -5,6 +5,7 @@ import { assets } from '../../assets/assests'
 import { AppContext } from '../../context/AppContext'
 import { toast } from 'react-toastify'
 import axios from 'axios'
+import BatchDropdown from '../../components/educator/BatchDropdown'
 
 
 const AddCourse = () => {
@@ -20,6 +21,7 @@ const AddCourse = () => {
   const [chapters, setChapters] = useState([])
   const [showPopup, setShowPopup] = useState(false)
   const [currentChapterId, setCurrentChapterId] = useState(null)
+  const [selectedBatchName, setSelectedBatchName] = useState("");
 
   const [lectureDetails, setLectureDetails] = useState(
     {
@@ -93,42 +95,63 @@ const AddCourse = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+    const handleSubmit = async (e) => {
     try {
-      e.preventDefault()
-      if(!image){
-        toast.error('Thumbnail Not Selected')
+      e.preventDefault();
+      if (!image) {
+        toast.error('Thumbnail Not Selected');
+        return;
       }
-      
+      if (!selectedBatchName) {
+        toast.error('Please select a batch');
+        return;
+      }
+
       const courseData = {
-        courseTitle, 
+        courseTitle,
         courseDescription: quillRef.current.root.innerHTML,
         coursePrice: Number(coursePrice),
         discount: Number(discount),
         courseContent: chapters,
-      }
-      
-      const formData = new FormData()
-      formData.append('courseData', JSON.stringify(courseData))
-      formData.append('image', image)
+        enrolledBatches: [selectedBatchName]
+      };
 
-      const token = await getToken()
-      const { data } = await axios.post(backendUrl + '/api/educator/add-course', formData, {headers: {Authorization: `Bearer ${token}`}})
-      if(data.success){
-        toast.success(data.message)
-        setCourseTitle('')
-        setCoursePrice(0)
-        setDiscount(0)
-        setImage(null)
-        setChapters([])
-        quillRef.current.root.innerHTML = ""
-      }else{
-        toast.error(data.message)
+      const formData = new FormData();
+      formData.append('courseData', JSON.stringify(courseData));
+      formData.append('image', image);
+
+      const token = await getToken();
+      const { data } = await axios.post(
+        backendUrl + '/api/educator/add-course',
+        formData,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      if (data.success) {
+        toast.success(data.message);
+
+        // // Add course ID to batchContent of selected batch
+        // const newCourseId = data.course._id;
+        // await axios.put(
+        //   backendUrl + `/api/course/batch/add-course/${selectedBatchId}`,
+        //   { courseId: newCourseId },
+        //   { headers: { Authorization: `Bearer ${token}` } }
+        // );
+
+        setCourseTitle('');
+        setCoursePrice(0);
+        setDiscount(0);
+        setImage(null);
+        setChapters([]);
+        // setSelectedBatchId('');
+        quillRef.current.root.innerHTML = "";
+      } else {
+        toast.error(data.message);
       }
     } catch (error) {
-      toast.error(error.message)
+      toast.error(error.message);
     }
-  }
+  };
 
   useEffect(()=>{
     //Initiate Quill only once 
@@ -170,7 +193,7 @@ const AddCourse = () => {
         <p>Discount %</p>
         <input onChange={e => setDiscount(e.target.value)} value={discount} type="number" placeholder='0' min={0} max={100} className='outline-none md:py-2.5 py-2 w-28 px-3 rounded border border-gray-500' required/>
         </div>
-
+        <BatchDropdown onSelect={setSelectedBatchName} />
         {/* Adding Chapters & Lectures */}
         <div>
           {chapters.map((chapter, chapterIndex) => (

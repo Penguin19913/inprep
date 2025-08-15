@@ -35,6 +35,7 @@ import kids_studying from './kids_studying.png'
 import inprep from './inprep.png'
 import inprep_with_name from './inprep_with_name.png'
 import made_in_india from './made_in_India.png'
+import inprep_name from './inprep_name.png'
 
 export const assets = {
     logo,
@@ -72,7 +73,8 @@ export const assets = {
     kids_studying,
     inprep,
     inprep_with_name,
-    made_in_india
+    made_in_india,
+    inprep_name
 }
 
 export const dummyDashboardData = {
