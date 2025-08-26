@@ -11,13 +11,15 @@ const brand = {
 };
 
 const navLinks = [
-  { label: (
+  {
+    label: (
       <>
-        Why{" "}
-        <span className="text-[#FE7E1D]">In</span>
+        Why <span className="text-[#FE7E1D]">In</span>
         <span className="text-[#008F3F]">Prep</span>
       </>
-    ), href: "#why" },
+    ),
+    href: "#why",
+  },
   { label: "Courses", href: "#courses" },
   { label: "How it works", href: "#how" },
   // { label: "Pricing", href: "#pricing" },
@@ -97,25 +99,27 @@ const Navbar = () => {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 lg:px-8">
         <Logo />
         <center>
-        <nav className="hidden items-center gap-6 md:flex">
-          {navLinks.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="text-sm font-medium text-black/70 hover:text-black"
-            >
-              {l.label}
-            </a>
-          ))}
-        </nav>
+          <nav className="hidden items-center gap-6 md:flex">
+            {navLinks.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                className="text-sm font-medium text-black/70 hover:text-black"
+              >
+                {l.label}
+              </a>
+            ))}
+          </nav>
         </center>
         <div className="flex items-center gap-3">
           <div>
             {user && (
               <>
-                <Button className="cursor-pointer" onClick={becomeEducator}>
-                  {isEducator ? "Educator Dashboard" : ""}
-                </Button>{" "}
+                {isEducator ? (
+                  <Button className="cursor-pointer" onClick={becomeEducator}>
+                    Educator Dashboard
+                  </Button>
+                ) : null}{" "}
                 <Button
                   as={Link}
                   to="/my-enrollments"
