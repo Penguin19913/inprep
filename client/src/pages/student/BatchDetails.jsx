@@ -50,7 +50,7 @@ const BatchDetails = () => {
   const enrollCourse = async () => {
     if (!isAlreadyEnrolled) {
       try {
-        window.open("https://forms.gle/EMHuYjQFbmXuGNud6", "_blank");
+        window.open("https://forms.gle/UHuB3mQEWzUJTi5cA", "_blank");
       } catch (error) {
         toast.error(error.message);
       }
