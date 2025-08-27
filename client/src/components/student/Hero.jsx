@@ -73,7 +73,7 @@ const Hero = () => (
             mobile with low data usage.
           </p>
 
-          <div>
+          <div className="mt-6">
             <SearchBar />
           </div>
 

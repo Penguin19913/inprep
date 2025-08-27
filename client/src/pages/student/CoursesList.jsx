@@ -39,7 +39,10 @@ const CoursesList = () => {
             <h1 className='text-4xl font-semibold text-gray-800'>Course List</h1>
             <p className='text-gray-500'><span className='text-blue-600 cursor-pointer' onClick={()=> navigate('/')}>Home</span> / <span>Batches List</span></p>
           </div>
+          <div className='flex-1 w-full'>
           <SearchBar data={input}/>
+            
+          </div>
         </div>
         { input && <div className='inline-flex items-center gap-4 px-4 py-2 border mt-8-mb-8 text-gray-600'>
           <p>{input}</p>

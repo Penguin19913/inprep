@@ -13,8 +13,10 @@ function Logo() {
           className="h-full w-full object-cover"
         />
       </div>
-      <div className="text-lg font-extrabold" style={{ color: "#0A2540" }}>
-        In<span className="text-white">Prep</span>
+      
+      <div className="text-lg font-extrabold">
+        <span className="text-[#FE7E1D]">In</span>
+        <span className="text-[#008F3F]">Prep</span>
       </div>
     </div>
   );
@@ -26,8 +28,10 @@ const Footer = () => (
       <div className="space-y-3">
         <Logo />
         <p className="text-sm text-white/70">
-          InPrep by BeyondStudy — a leading online learning platform
-          delivering NCERT-based courses from Class 1 to 12.
+          <span className="text-[#FE7E1D]">In</span>
+          <span className="text-[#008F3F]">Prep</span> 
+          &nbsp; by BeyondStudy — a leading online learning platform
+          delivering NCERT-based courses <br />from Class 1 to 12.
         </p>
       </div>
       <div>
@@ -65,7 +69,7 @@ const Footer = () => (
             <PhoneCall className="h-4 w-4" /> +91 6387 992259
           </li>
           <li className="flex items-center gap-2">
-            <PhoneCall className="h-4 w-4" /> +91 9103 998735
+            <PhoneCall className="h-4 w-4" /> +91 8899 056475
           </li>
           <li className="flex items-center gap-2">
             <Mail className="h-4 w-4" /> contactinprep@gmail.com
@@ -77,7 +81,8 @@ const Footer = () => (
       </div>
     </div>
     <div className="mx-auto mt-5 max-w-7xl px-4 text-center text-xs text-white/60 lg:px-8">
-      © {new Date().getFullYear()} InPrep by BeyondStudy. All rights reserved.
+      © {new Date().getFullYear()} <span className="text-[#FE7E1D]">In</span>
+          <span className="text-[#008F3F]">Prep</span> by BeyondStudy. All rights reserved.
     </div>
   </footer>
 );

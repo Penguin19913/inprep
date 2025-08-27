@@ -31,7 +31,7 @@ const SearchBar = ({ data }) => {
   };
 
   return (
-    <form onSubmit={onSearchHandler} className="mx-auto mt-6 flex max-w-xl items-center gap-2 rounded-2xl border border-black/10 bg-white/80 p-2 shadow">
+    <form onSubmit={onSearchHandler} className="mx-auto flex max-w-xl items-center gap-2 rounded-2xl border border-black/10 bg-white/80 p-2 shadow">
       <Search className="ml-2 h-5 w-5 text-black/40" />
       <input
         className={`w-full rounded-2xl border border-black/10 bg-white/95 px-4 py-3 text-sm shadow-inner placeholder:text-black/40 focus:border-black/40 focus:outline-none`}

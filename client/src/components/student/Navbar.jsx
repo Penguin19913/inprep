@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { assets } from "../../assets/assests";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useClerk, UserButton, useUser } from "@clerk/clerk-react";
 import { AppContext } from "../../context/AppContext";
 import { toast } from "react-toastify";
@@ -18,12 +18,13 @@ const navLinks = [
         <span className="text-[#008F3F]">Prep</span>
       </>
     ),
-    href: "#why",
+    href: "/#why",
   },
-  { label: "Courses", href: "#courses" },
-  { label: "How it works", href: "#how" },
+  { label: "Courses", href: "/#courses" },
+  { label: "How it works", href: "/#how" },
   // { label: "Pricing", href: "#pricing" },
-  { label: "FAQ", href: "#faq" },
+  { label: "FAQ", href: "/#faq" },
+  
 ];
 
 const Button = ({ className = "", children, as = "button", ...props }) => {
@@ -101,13 +102,12 @@ const Navbar = () => {
         <center>
           <nav className="hidden items-center gap-6 md:flex">
             {navLinks.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
+              <Link
+                to={l.href}
                 className="text-sm font-medium text-black/70 hover:text-black"
               >
                 {l.label}
-              </a>
+              </Link>
             ))}
           </nav>
         </center>
