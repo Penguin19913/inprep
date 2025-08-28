@@ -29,8 +29,10 @@ const CoursesList = () => {
         console.log("hello")
 
   }
-},[allBatches, input])
-
+  },[allBatches, input])
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <div className='relative md:px-36 px-8 pt-20 text-left min-h-[62vh]'>

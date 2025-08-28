@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const brand = {
   green: "#18A957",
@@ -52,8 +53,8 @@ const CTA = () => (
           </Button>
           <Button
             className="bg-white text-black hover:bg-black/5"
-            as="a"
-            href="/courses"
+            as={Link}
+            to="/course-list"
           >
             Browse courses
           </Button>
