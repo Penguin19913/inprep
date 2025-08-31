@@ -157,7 +157,7 @@ const BatchDetails = () => {
             ></p>
           </div>
           {/* Display Subjects in The Batch */}
-          <div className="relative px-4 md:px-10 lg:px-20 py-10 bg-gradient-to-br from-[#f5eddf] via-[#f7f3e9] to-[#e9e2d1] rounded-2xl shadow-xl border border-[#e5d7b8] min-h-[40vh]">
+          <div className="mb-3 relative px-4 md:px-10 lg:px-20 py-10 bg-gradient-to-br from-[#f5eddf] via-[#f7f3e9] to-[#e9e2d1] rounded-2xl shadow-xl border border-[#e5d7b8] min-h-[40vh]">
             <h4 className=" font-bold text-gray-800 mb-3 tracking-tight">
               Subjects in this Batch
             </h4>
@@ -199,7 +199,9 @@ const BatchDetails = () => {
         </div>
 
         {/* right column */}
-        <div className="max-w-course-card z-10 shadow-custom-card rounded-t md:rounded-none overflow-hidden bg-white min-w-[300px] max-w-[400px] sm:min-w-[420px]">
+        <div className="max-w-course-card z-10 shadow-custom-card rounded-t md:rounded-none overflow-hidden bg-[#f5eddf] min-w-[300px] max-w-[400px] sm:min-w-[420px]"
+        style={{ background: `linear-gradient(180deg, #f5eddf, 
+      #ffffff` }}>
           {playerData ? (
             <div>
               <YouTube

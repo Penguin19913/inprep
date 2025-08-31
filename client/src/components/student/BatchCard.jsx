@@ -12,7 +12,10 @@ const BatchCard = ({batch}) => {
     className='border border-gray-500/30 overflow-hidden rounded-lg rounded-2xl shadow-md hover:shadow-lg transition-shadow p-2 max-w-100 transform hover:scale-[1.02] transition duration-300 bg-[#cdbf9f]'>
       <img className='w-full h-40 object-cover rounded-xl' src={batch.batchThumbnail} alt="Course Thumbnail"/>
       <div className='p-3 text-left'>
+        <div className='flex flex-row justify-between pr-5'>
         <h3 className='text-base font-semibold'>{batch.batchTitle}</h3>
+        <h3 className='text-base font-semibold'>Class: {batch.batchClass}</h3>
+        </div>
         <p className='text-gray-500'>{batch.educator.name}</p>
         {/* <div className='flex items-center space-x-2'>
           <p>{calculateRating(course)}</p>
@@ -22,7 +25,7 @@ const BatchCard = ({batch}) => {
           </div>
           <p className='text-gray-500'>{course.courseRatings.length}</p>
         </div> */}
-        <p className='text-base font-semibold text-gray-800'>{currency}{(batch.batchPrice - batch.discount *batch.batchPrice / 100).toFixed(2)}</p>
+        <p className='text-base font-semibold text-gray-800'>{currency}{(batch.batchPrice).toFixed(2)}</p>
       </div>
     </Link>
   )
