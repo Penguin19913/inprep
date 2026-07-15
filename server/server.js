@@ -18,7 +18,8 @@ await connectCloudinary()
 
 // Middlewares
 app.use(cors({
-    origin: 'https://inprep-murex.vercel.app'
+    origin: 'https://inprep-murex.vercel.app',
+    credentials: true
 }))
 app.use(clerkMiddleware())
 
