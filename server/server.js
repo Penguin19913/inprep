@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import 'dotenv/config' 
+import 'dotenv/config'
 import connectDB from './configs/mongodb.js'
 import { clerkWebhooks } from './controllers/webhooks.js'
 import educatorRouter from './routes/educatorRoutes.js'
@@ -9,29 +9,35 @@ import connectCloudinary from './configs/cloudinary.js'
 import courseRouter from './routes/courseRoute.js'
 import userRouter from './routes/userRoutes.js'
 
-//Initialize Express
 const app = express()
 
-//Connect to databse
-await connectDB()
-await connectCloudinary()
-
-// Middlewares
-app.use(cors({
-
-}))
+app.use(cors())
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 app.use(clerkMiddleware())
 
-// Routes
-app.get('/', (req, res)=> res.send("API Working"))
-app.post('/clerk', express.json(), clerkWebhooks)
-app.use('/api/educator', express.json(), educatorRouter)
-app.use('/api/course', express.json(), courseRouter)
-app.use('/api/user', express.json(), userRouter)
+app.get('/', (req, res) => res.send('API Working'))
+app.post('/clerk', clerkWebhooks)
+app.use('/api/educator', educatorRouter)
+app.use('/api/course', courseRouter)
+app.use('/api/user', userRouter)
 
-// Port
-const PORT = process.env.PORT || 5000
+const initializeServices = async () => {
+  try {
+    await connectDB()
+    await connectCloudinary()
+  } catch (error) {
+    console.error('Startup initialization failed:', error.message)
+  }
+}
 
-app.listen(PORT, ()=>{
+await initializeServices()
+
+if (!process.env.VERCEL) {
+  const PORT = process.env.PORT || 5000
+  app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
-})
+  })
+}
+
+export default app
